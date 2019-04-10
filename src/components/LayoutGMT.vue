@@ -1,31 +1,31 @@
 <template>
   <el-container>
     <el-header>
-      <Group></Group>
+      <GroupList></GroupList>
     </el-header>
 
     <el-container>
-      <el-aside width="400px">
-        <Module></Module>
+      <el-aside width="300px">
+        <ModuleList></ModuleList>
       </el-aside>
 
       <el-main>
-        <Todo></Todo>
+        <TodoList></TodoList>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import Group from '../views/Group.vue'
-import Module from '../views/Module.vue'
-import Todo from '../views/Todo.vue'
+import GroupList from '../views/GroupList.vue'
+import ModuleList from '../views/ModuleList.vue'
+import TodoList from '../views/TodoList.vue'
 
 export default {
   components: {
-    Group,
-    Module,
-    Todo
+    GroupList,
+    ModuleList,
+    TodoList
   }
 }
 </script>

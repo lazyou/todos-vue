@@ -1,30 +1,42 @@
 <template>
-  <section>
-    <el-input placeholder="请输入内容" v-model="todo">
-      <template slot="prepend">
-        <!-- <div style="width: 90px;"> -->
+  <div style="line-height: 60px;">
+    <!-- todo 输入框 -->
+    <el-input
+      placeholder="请输入内容"
+      v-model="todo">
+
+      <!-- todo 左边操作 -->
+      <template slot="prepend" v-bind:style="{paddingRight: '0px'}">
           <el-checkbox v-model="checked"></el-checkbox>
-          <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 90px;margin-right: 0px;">
-            <el-option label="林xx" value="1"></el-option>
-            <el-option label="王xx" value="2"></el-option>
-            <el-option label="张xx" value="3"></el-option>
+
+          <el-select
+            filterable
+            v-model="select"
+            placeholder="请选择"
+            style="width: 90px; margin-right: 0px;">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
           </el-select>
 
           <el-date-picker
             v-model="value1"
             type="date"
             placeholder="截止日期"
-            class="">
+            style="width: 140px;">
           </el-date-picker>
-        <!-- </div> -->
       </template>
 
+      <!-- todo 右边操作  -->
       <template slot="append">
         <i class="el-icon-edit" style="padding-right: 10px;"></i>
         <i class="el-icon-delete"></i>
       </template>
     </el-input>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -32,17 +44,38 @@ export default {
   data () {
     return {
       checked: true,
-      select: '',
       value1: '',
-      todo: '某某任务'
+      todo: '某某任务',
+      select: '',
+      options: [
+        {
+          value: 1,
+          label: '林某某'
+        },
+        {
+          value: 2,
+          label: '王某某'
+        },
+        {
+          value: 3,
+          label: '陈某某'
+        }
+      ]
     }
   }
 }
 </script>
 
-<style scoped>
-/* 如何重写截止日期: el-date-picker 的 style */
-.el-input-group__prepend > .el-input__inner {
+<style>
+.el-input-group__prepend {
+  padding-right: 0px;
+}
+
+.el-date-editor > input {
   border: none;
+}
+
+.el-input__inner {
+  height: auto;
 }
 </style>
