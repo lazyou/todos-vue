@@ -32,7 +32,7 @@
 
       <!-- todo 右边操作  -->
       <template slot="append">
-        <i class="el-icon-edit" style="padding-right: 10px;"></i>
+        <i class="el-icon-success" style="padding-right: 10px;" v-show="isSaveEdit"></i>
         <i class="el-icon-delete"></i>
       </template>
     </el-input>
@@ -47,6 +47,7 @@ export default {
       value1: '',
       todo: '某某任务',
       select: '',
+      isSaveEdit: true,
       options: [
         {
           value: 1,
