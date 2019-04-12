@@ -4,12 +4,18 @@
     @mouseleave="setRightOperate(false)"
     class="text item">
 
-    {{ item.name }}
+    <el-input
+      v-model="item.name"
+      :disabled="!isCanEdit"
+      size="medium"
+      placeholder="请输入内容">
+    </el-input>
+    <!-- {{ item.name }} -->
 
     <span v-if="rightOperate" style="padding-left:30px">
-      <i class="el-icon-edit"></i>
+      <i @click="editItem(item.id)" class="el-icon-edit"></i>
       &nbsp;
-      <i class="el-icon-delete"></i>
+      <i @click="deleteItem(item.id)" class="el-icon-delete"></i>
     </span>
 
     <el-progress
@@ -38,7 +44,8 @@ export default {
     return {
       item: this.module,
       // 右侧操作按钮显示状态
-      rightOperate: false
+      rightOperate: false,
+      isCanEdit: false
     }
   },
 
@@ -59,6 +66,28 @@ export default {
   methods: {
     setRightOperate: function (status) {
       this.rightOperate = status
+    },
+
+    editItem: function (id) {
+      this.isCanEdit = true
+    },
+
+    deleteItem: function (moduleId) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     }
   }
 }
