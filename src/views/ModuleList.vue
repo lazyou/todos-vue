@@ -6,7 +6,19 @@
       v-bind:module="item">
     </Module>
 
-    <i class="el-icon-plus"></i>
+    <el-input
+      v-model="new_module_name"
+      size="medium"
+      placeholder="添加模块">
+    </el-input>
+
+    <el-button
+      @click="createModule()"
+      type="primary"
+      icon="el-icon-check"
+      style="margin-top:20px;"
+      circle>
+    </el-button>
   </el-card>
 </template>
 
@@ -17,10 +29,10 @@ export default {
   components: {
     Module
   },
+
   data () {
     return {
-      // 当前选中 module
-      module_id: 1,
+      new_module_name: '',
       // 当前分组下的 modules
       modules: [
         {
@@ -49,6 +61,17 @@ export default {
           percentage: 100
         }
       ]
+    }
+  },
+
+  methods: {
+    createModule: function () {
+      this.$message({
+        message: '创建成功',
+        type: 'success',
+        center: true
+      })
+      // 然后请求模块列表
     }
   }
 }

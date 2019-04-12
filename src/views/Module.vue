@@ -21,7 +21,7 @@
       <el-button
         slot="append"
         v-if="isCanEdit"
-        @click="saveItem(item.id)"
+        @click="saveModule(item.id)"
         style="padding: 10px;"
         icon="el-icon-check">
       </el-button>
@@ -37,7 +37,7 @@
       <el-button
         slot="append"
         v-if="isCanEdit"
-        @click="deleteItem(item.id)"
+        @click="deleteModule(item.id)"
         style="padding: 10px;"
         icon="el-icon-delete">
       </el-button>
@@ -98,7 +98,7 @@ export default {
       }, 100)
     },
 
-    saveItem: function (moduleId) {
+    saveModule: function (moduleId) {
       this.$message({
         message: '保存成功',
         type: 'success',
@@ -106,7 +106,7 @@ export default {
       })
     },
 
-    deleteItem: function (moduleId) {
+    deleteModule: function (moduleId) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
