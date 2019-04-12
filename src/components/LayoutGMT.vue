@@ -5,7 +5,7 @@
     </el-header>
 
     <el-container>
-      <el-aside width="300px">
+      <el-aside width="500px">
         <ModuleList></ModuleList>
       </el-aside>
 
