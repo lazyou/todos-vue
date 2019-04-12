@@ -52,6 +52,7 @@
 
 <script>
 import { setTimeout } from 'timers'
+
 export default {
   props: {
     // 模块对象(单条)
@@ -137,6 +138,7 @@ export default {
   padding: 18px 0;
 }
 
+/* TODO: 样式重写失败 */
 .el-input.is-disabled .el-input__inner {
   color: black;
   background-color: white;
