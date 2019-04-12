@@ -37,6 +37,7 @@ export default {
     // console.log(this.module)
     return {
       item: this.module,
+      // 右侧操作按钮显示状态
       rightOperate: false
     }
   },
