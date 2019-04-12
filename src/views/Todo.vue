@@ -31,10 +31,8 @@
       </template>
 
       <!-- todo 右边操作  -->
-      <template slot="append">
-        <i class="el-icon-success" style="padding-right: 10px;" v-show="isSaveEdit"></i>
-        <i class="el-icon-delete"></i>
-      </template>
+      <el-button slot="append" icon="el-icon-check"></el-button>
+      <el-button slot="append" icon="el-icon-delete"></el-button>
     </el-input>
   </div>
 </template>

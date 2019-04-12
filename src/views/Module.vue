@@ -1,22 +1,47 @@
 <template>
   <div
-    @mouseover="setRightOperate(true)"
-    @mouseleave="setRightOperate(false)"
     class="text item">
+    <!-- @mouseover="setRightOperate(true)" -->
+    <!-- @mouseleave="setRightOperate(false)" -->
 
     <el-input
       v-model="item.name"
       :disabled="!isCanEdit"
+      ref="moduleName"
       size="medium"
       placeholder="请输入内容">
-    </el-input>
-    <!-- {{ item.name }} -->
+      <el-button
+        slot="append"
+        v-if="!isCanEdit"
+        @click="setIsCanEdit(item.id, true)"
+        style="padding: 10px;"
+        icon="el-icon-edit">
+      </el-button>
 
-    <span v-if="rightOperate" style="padding-left:30px">
-      <i @click="editItem(item.id)" class="el-icon-edit"></i>
-      &nbsp;
-      <i @click="deleteItem(item.id)" class="el-icon-delete"></i>
-    </span>
+      <el-button
+        slot="append"
+        v-if="isCanEdit"
+        @click="saveItem(item.id)"
+        style="padding: 10px;"
+        icon="el-icon-check">
+      </el-button>
+
+      <el-button
+        slot="append"
+        v-if="isCanEdit"
+        @click="setIsCanEdit(item.id, false)"
+        style="padding: 10px;"
+        icon="el-icon-close">
+      </el-button>
+
+      <el-button
+        slot="append"
+        v-if="isCanEdit"
+        @click="deleteItem(item.id)"
+        style="padding: 10px;"
+        icon="el-icon-delete">
+      </el-button>
+    </el-input>
 
     <el-progress
       :percentage="item.percentage"
@@ -26,6 +51,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers'
 export default {
   props: {
     // 模块对象(单条)
@@ -43,8 +69,6 @@ export default {
     // console.log(this.module)
     return {
       item: this.module,
-      // 右侧操作按钮显示状态
-      rightOperate: false,
       isCanEdit: false
     }
   },
@@ -64,12 +88,22 @@ export default {
   },
 
   methods: {
-    setRightOperate: function (status) {
-      this.rightOperate = status
+    setIsCanEdit: function (moduleId, status) {
+      console.log('setIsCanEdit')
+
+      this.isCanEdit = status
+
+      setTimeout(() => {
+        this.$refs.moduleName.focus()
+      }, 100)
     },
 
-    editItem: function (id) {
-      this.isCanEdit = true
+    saveItem: function (moduleId) {
+      this.$message({
+        message: '保存成功',
+        type: 'success',
+        center: true
+      })
     },
 
     deleteItem: function (moduleId) {
@@ -93,7 +127,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .text {
   font-size: 16px;
 }
@@ -101,5 +135,17 @@ export default {
 .item {
   line-height: 20px;
   padding: 18px 0;
+}
+
+.el-input.is-disabled .el-input__inner {
+  color: black;
+  background-color: white;
+  font-weight: 500;
+  cursor: auto;
+}
+
+.el-input-group__append > button {
+  width: 40px;
+  padding: 0px;
 }
 </style>
