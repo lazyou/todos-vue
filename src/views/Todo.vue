@@ -3,6 +3,7 @@
     <!-- todo 输入框 -->
     <el-input
       v-model="todo.name"
+      :disabled="!isCanEdit"
       ref="todoName"
       placeholder="请输入内容">
 
@@ -54,7 +55,7 @@
       <el-button
         slot="append"
         v-if="isCanEdit"
-        @click="setIsCanEdit(todo.id, false)"
+        @click="cancelTodo(todo.id)"
         style="padding: 10px;"
         icon="el-icon-close">
       </el-button>
@@ -90,6 +91,7 @@ export default {
   data () {
     return {
       todo: this.todoItem,
+      todoNameBackup: this.todoItem.name,
       users: this.userList,
       isCanEdit: false
     }
@@ -97,8 +99,6 @@ export default {
 
   methods: {
     setIsCanEdit: function (todoId, status) {
-      console.log('setIsCanEdit')
-
       this.isCanEdit = status
 
       setTimeout(() => {
@@ -107,11 +107,19 @@ export default {
     },
 
     saveTodo: function (todoId) {
+      this.isCanEdit = false
+      this.todoNameBackup = this.todo.name
+
       this.$message({
         message: '保存成功',
         type: 'success',
         center: true
       })
+    },
+
+    cancelTodo: function (todoId) {
+      this.isCanEdit = false
+      this.todo.name = this.todoNameBackup
     },
 
     deleteTodo: function (todoId) {
