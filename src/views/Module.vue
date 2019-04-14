@@ -5,7 +5,7 @@
     <!-- @mouseleave="setRightOperate(false)" -->
 
     <el-input
-      v-model="item.name"
+      v-model="module.name"
       :disabled="!isCanEdit"
       ref="moduleName"
       size="medium"
@@ -13,7 +13,7 @@
       <el-button
         slot="append"
         v-if="!isCanEdit"
-        @click="setIsCanEdit(item.id, true)"
+        @click="setIsCanEdit(module.id, true)"
         style="padding: 10px;"
         icon="el-icon-edit">
       </el-button>
@@ -21,7 +21,7 @@
       <el-button
         slot="append"
         v-if="isCanEdit"
-        @click="saveModule(item.id)"
+        @click="saveModule(module.id)"
         style="padding: 10px;"
         icon="el-icon-check">
       </el-button>
@@ -29,7 +29,7 @@
       <el-button
         slot="append"
         v-if="isCanEdit"
-        @click="setIsCanEdit(item.id, false)"
+        @click="cancelModule(module.id)"
         style="padding: 10px;"
         icon="el-icon-close">
       </el-button>
@@ -37,26 +37,24 @@
       <el-button
         slot="append"
         v-if="isCanEdit"
-        @click="deleteModule(item.id)"
+        @click="deleteModule(module.id)"
         style="padding: 10px;"
         icon="el-icon-delete">
       </el-button>
     </el-input>
 
     <el-progress
-      :percentage="item.percentage"
+      :percentage="module.percentage"
       :status="percentageStatus">
     </el-progress>
   </div>
 </template>
 
 <script>
-import { setTimeout } from 'timers'
-
 export default {
   props: {
     // 模块对象(单条)
-    module: Object,
+    moduleItem: Object,
     default: function () {
       return {
         id: 0,
@@ -67,9 +65,9 @@ export default {
   },
 
   data () {
-    // console.log(this.module)
     return {
-      item: this.module,
+      module: this.moduleItem,
+      moduleNameBackup: this.moduleItem.name,
       isCanEdit: false
     }
   },
@@ -90,8 +88,6 @@ export default {
 
   methods: {
     setIsCanEdit: function (moduleId, status) {
-      console.log('setIsCanEdit')
-
       this.isCanEdit = status
 
       setTimeout(() => {
@@ -100,11 +96,19 @@ export default {
     },
 
     saveModule: function (moduleId) {
+      this.isCanEdit = false
+      this.moduleNameBackup = this.module.name
+
       this.$message({
         message: '保存成功',
         type: 'success',
         center: true
       })
+    },
+
+    cancelModule: function (moduleId) {
+      this.isCanEdit = false
+      this.module.name = this.moduleNameBackup
     },
 
     deleteModule: function (moduleId) {

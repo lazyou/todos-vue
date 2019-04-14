@@ -3,7 +3,7 @@
     <Module
       v-for="item in modules"
       v-bind:key="item.id"
-      v-bind:module="item">
+      v-bind:moduleItem="item">
     </Module>
 
     <el-input
@@ -71,7 +71,6 @@ export default {
         type: 'success',
         center: true
       })
-      // 然后请求模块列表
     }
   }
 }
