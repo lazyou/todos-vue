@@ -10,6 +10,7 @@
       </el-aside>
 
       <el-main>
+        <ModuleInfo></ModuleInfo>
         <TodoList></TodoList>
       </el-main>
     </el-container>
@@ -19,12 +20,14 @@
 <script>
 import GroupList from '../views/GroupList.vue'
 import ModuleList from '../views/ModuleList.vue'
+import ModuleInfo from '../views/ModuleInfo.vue'
 import TodoList from '../views/TodoList.vue'
 
 export default {
   components: {
     GroupList,
     ModuleList,
+    ModuleInfo,
     TodoList
   }
 }
