@@ -1,30 +1,148 @@
 <template>
-  <section>
-    <el-dropdown  @command="handleCommand">
-      <span class="el-dropdown-link">
-        {{ groupName }}<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="v1 后端 api">v1 后端 api</el-dropdown-item>
-        <el-dropdown-item command="v1 客户端 安卓">v1 客户端 安卓</el-dropdown-item>
-        <el-dropdown-item command="v1 客户端 苹果">v1 客户端 苹果</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-  </section>
+  <div>
+    <section v-if="!isCanEdit" >
+      <el-dropdown @command="selectGroup">
+        <span class="el-dropdown-link">
+          {{ currentGroup.name }}
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item
+            v-for="group in groups"
+            v-bind:key="group.id"
+            :command="group">
+            {{ group.name }}
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+
+      <el-button
+        v-if="isShowEeitButton"
+        @click="setIsCanEdit(true)"
+        icon="el-icon-edit"
+        style="background-color:transparent; border:transparent;">
+      </el-button>
+    </section>
+
+    <section v-if="isCanEdit">
+      <el-input
+        v-model="currentGroup.name"
+        ref="currentGroupName"
+        size="medium"
+        style="width:50%;"
+        placeholder="请输入内容">
+        <el-button
+          slot="append"
+          @click="saveGroup()"
+          icon="el-icon-check">
+        </el-button>
+
+        <el-button
+          slot="append"
+          @click="cancelGroup()"
+          icon="el-icon-close">
+        </el-button>
+
+        <el-button
+          slot="append"
+          @click="deleteGroup()"
+          icon="el-icon-delete">
+        </el-button>
+      </el-input>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      groupName: '请选择 分组'
+      isCanEdit: false,
+      isShowEeitButton: false,
+      currentGroup: {
+        id: 0,
+        name: '请选择分组'
+      },
+      currentGroupBackup: {
+        id: 0,
+        name: '请选择分组'
+      },
+      groups: [
+        {
+          id: 1,
+          name: 'v1 后端 api'
+        },
+        {
+          id: 2,
+          name: 'v1 客户端 安卓'
+        },
+        {
+          id: 3,
+          name: 'v1 客户端 苹果'
+        }
+      ]
     }
   },
+
   methods: {
-    handleCommand (command) {
-      this.$message('click on item ' + command)
-      this.groupName = command
+    selectGroup (group) {
+      this.currentGroup = group
+      this.currentGroupBackup = Object.assign({}, group) // 必须是赋值新对象
+      this.isShowEeitButton = true
+    },
+
+    setIsCanEdit: function (status) {
+      this.isCanEdit = status
+
+      setTimeout(() => {
+        this.$refs.currentGroupName.focus()
+      }, 100)
+    },
+
+    saveGroup: function () {
+      this.isCanEdit = false
+
+      this.$message({
+        message: '保存成功',
+        type: 'success',
+        center: true
+      })
+    },
+
+    cancelGroup: function () {
+      this.isCanEdit = false
+
+      this.groups.map((group, index) => {
+        if (this.currentGroup.id === group.id) {
+          this.groups[index].name = this.currentGroupBackup.name
+        }
+      })
+    },
+
+    deleteGroup: function () {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   }
 }
 </script>
+
+<style scoped>
+.el-button {
+  background-color: transparent;
+  border: transparent;
+}
+</style>
