@@ -16,11 +16,19 @@
         </el-dropdown-menu>
       </el-dropdown>
 
+      <!-- 编辑 -->
       <el-button
         v-if="isShowEeitButton"
         @click="setIsCanEdit(true)"
         icon="el-icon-edit"
-        style="background-color:transparent; border:transparent;">
+        style="padding-right:10px; background-color:transparent; border:transparent;">
+      </el-button>
+
+      <!-- 新增 -->
+      <el-button
+        icon="el-icon-plus"
+        @click="addGroup()"
+        style="padding-left:10px; margin-left:0px; background-color:transparent; border:transparent;">
       </el-button>
     </section>
 
@@ -99,6 +107,11 @@ export default {
       }, 100)
     },
 
+    addGroup: function () {
+      this.setIsCanEdit(true)
+      this.currentGroup.name = ''
+    },
+
     saveGroup: function () {
       this.isCanEdit = false
 
@@ -112,11 +125,17 @@ export default {
     cancelGroup: function () {
       this.isCanEdit = false
 
-      this.groups.map((group, index) => {
-        if (this.currentGroup.id === group.id) {
-          this.groups[index].name = this.currentGroupBackup.name
-        }
-      })
+      // 新增取消情况
+      if (this.currentGroup.id === 0) {
+        this.currentGroup.name = this.currentGroupBackup.name
+      } else {
+        // 修改取消情况
+        this.groups.map((group, index) => {
+          if (this.currentGroup.id === group.id) {
+            this.groups[index].name = this.currentGroupBackup.name
+          }
+        })
+      }
     },
 
     deleteGroup: function () {
