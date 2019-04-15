@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import { objAssign } from '../utils/function'
+
 export default {
   props: {
     userList: Array,
@@ -86,7 +88,7 @@ export default {
   data () {
     return {
       todo: this.todoItem,
-      todoBackup: Object.assign({}, this.todoItem),
+      todoBackup: objAssign(this.todoItem),
       users: this.userList,
       isCanEdit: false
     }
@@ -113,7 +115,7 @@ export default {
 
     cancelTodo: function (todoId) {
       this.isCanEdit = false
-      this.todo = Object.assign({}, this.todoBackup)
+      this.todo = objAssign(this.todoBackup)
     },
 
     deleteTodo: function (todoId) {

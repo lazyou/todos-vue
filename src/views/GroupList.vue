@@ -1,7 +1,7 @@
 <template>
   <div>
     <section v-if="!isCanEdit" >
-      <el-dropdown @command="selectGroup">
+      <el-dropdown trigger="click" @command="selectGroup">
         <span class="el-dropdown-link">
           {{ currentGroup.name }}
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { objAssign } from '../utils/function'
+
 export default {
   data () {
     return {
@@ -95,7 +97,7 @@ export default {
   methods: {
     selectGroup (group) {
       this.currentGroup = group
-      this.currentGroupBackup = Object.assign({}, group) // 必须是赋值新对象
+      this.currentGroupBackup = objAssign(group)
       this.isShowEeitButton = true
     },
 
