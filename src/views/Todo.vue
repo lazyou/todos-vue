@@ -80,22 +80,13 @@ export default {
   props: {
     userList: Array,
     // 待办项对象(单条)
-    todoItem: Object,
-    default: function () {
-      return {
-        id: 0,
-        name: '',
-        is_done: false,
-        user_id: 0,
-        expect_done_at: ''
-      }
-    }
+    todoItem: Object
   },
 
   data () {
     return {
       todo: this.todoItem,
-      todoNameBackup: this.todoItem.name,
+      todoBackup: Object.assign({}, this.todoItem),
       users: this.userList,
       isCanEdit: false
     }
@@ -112,7 +103,6 @@ export default {
 
     saveTodo: function (todoId) {
       this.isCanEdit = false
-      this.todoNameBackup = this.todo.name
 
       this.$message({
         message: '保存成功',
@@ -123,7 +113,7 @@ export default {
 
     cancelTodo: function (todoId) {
       this.isCanEdit = false
-      this.todo.name = this.todoNameBackup
+      this.todo = Object.assign({}, this.todoBackup)
     },
 
     deleteTodo: function (todoId) {
