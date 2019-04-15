@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="text item">
+  <div class="text item">
     <!-- @mouseover="setRightOperate(true)" -->
     <!-- @mouseleave="setRightOperate(false)" -->
 

@@ -5,20 +5,23 @@
       v-model="todo.name"
       :disabled="!isCanEdit"
       ref="todoName"
+      style="color: black;"
       placeholder="请输入内容">
 
       <!-- todo 左边操作 -->
       <el-checkbox
         slot="prepend"
-        v-model="todo.is_done">
+        v-model="todo.is_done"
+        :disabled="!isCanEdit">
       </el-checkbox>
 
       <el-select
         slot="prepend"
         filterable
         v-model="todo.user_id"
+        :disabled="!isCanEdit"
         placeholder="请选择"
-        style="width: 90px; margin-right: 0px;">
+        style="width:90px; margin-right:0px;">
         <el-option
           v-for="user in users"
           :key="user.id"
@@ -30,9 +33,10 @@
       <el-date-picker
         slot="prepend"
         v-model="todo.expect_done_at"
+        :disabled="!isCanEdit"
         type="date"
-        placeholder="截止日期"
-        style="width: 140px;">
+        style="width:140px;"
+        placeholder="截止日期">
       </el-date-picker>
 
       <!-- todo 右边操作  -->
@@ -144,19 +148,30 @@ export default {
 </script>
 
 <style scoped>
-.el-input-group__prepend {
+.el-checkbox {
+  margin-left: -5px;
+  margin-right: 20px;
+}
+
+.el-input-group--prepend >>> .el-input-group__prepend {
   padding-right: 0px;
 }
 
-.el-date-editor > input {
-  border: none;
+.el-date-editor >>> input {
+  height: 38px;
+  border: 0px;
 }
 
-.el-input__inner {
-  height: auto;
+div >>> .el-input.is-disabled .el-input__inner {
+  color: #606266;
 }
 
-.el-input-group__append {
-  height: 40px;
+div >>> .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+  background-color: #409EFF;
+  border-color: #409EFF;
+}
+
+.is-disabled >>> .el-select .el-input.is-disabled .el-input__inner:hover {
+  border-left: transparent;
 }
 </style>
