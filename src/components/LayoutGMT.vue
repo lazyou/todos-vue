@@ -12,6 +12,7 @@
       <el-main>
         <ModuleInfo></ModuleInfo>
         <TodoList></TodoList>
+        <ModuleComment></ModuleComment>
       </el-main>
     </el-container>
   </el-container>
@@ -22,13 +23,15 @@ import GroupList from '../views/GroupList.vue'
 import ModuleList from '../views/ModuleList.vue'
 import ModuleInfo from '../views/ModuleInfo.vue'
 import TodoList from '../views/TodoList.vue'
+import ModuleComment from '../views/ModuleComment.vue'
 
 export default {
   components: {
     GroupList,
     ModuleList,
     ModuleInfo,
-    TodoList
+    TodoList,
+    ModuleComment
   }
 }
 </script>
