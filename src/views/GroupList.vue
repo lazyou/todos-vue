@@ -62,7 +62,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import Http from '../utils/http'
 import { objAssign } from '../utils/function'
 
 export default {
@@ -84,16 +85,13 @@ export default {
   },
 
   mounted () {
-    axios
-      .get('http://localhost:8000/groups.php')
-      .then(response => {
+    new Http({
+      url: '/groups.php',
+      method: 'GET',
+      handleThen: (response) => {
         this.groups = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      }).finally(() => {
-        this.loading = false
-      })
+      }
+    }).run()
   },
 
   methods: {

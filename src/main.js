@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 import VueI18n from 'vue-i18n'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -14,6 +15,7 @@ import store from './store'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueI18n)
+Vue.use(Vuex)
 
 const messages = {
   en: {
