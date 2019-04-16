@@ -45,7 +45,7 @@
         v-if="!isCanEdit"
         @click="setIsCanEdit(todo.id, true)"
         style="padding: 10px;"
-        icon="el-icon-edit">
+        v-bind:icon="editIcon" >
       </el-button>
 
       <el-button
@@ -91,6 +91,13 @@ export default {
       todoBackup: objAssign(this.todoItem),
       users: this.userList,
       isCanEdit: false
+    }
+  },
+
+  computed: {
+    // 按钮图标: 创建 或是 编辑
+    editIcon: function () {
+      return this.todo.id === 0 ? 'el-icon-plus' : 'el-icon-edit'
     }
   },
 

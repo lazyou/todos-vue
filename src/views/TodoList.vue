@@ -6,6 +6,12 @@
       v-bind:userList="users"
       v-bind:todoItem="todo">
     </Todo>
+
+    <Todo
+      v-bind:key="dotoInit.id"
+      v-bind:userList="users"
+      v-bind:todoItem="dotoInit">
+    </Todo>
   </div>
 </template>
 
@@ -33,6 +39,14 @@ export default {
           name: '陈某某'
         }
       ],
+
+      dotoInit: {
+        id: 0,
+        name: '',
+        is_done: false,
+        user_id: null,
+        expect_done_at: ''
+      },
 
       todos: [
         {
