@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { objAssign } from '../utils/function'
 
 export default {
@@ -78,20 +79,21 @@ export default {
         name: '请选择分组'
       },
       groups: [
-        {
-          id: 1,
-          name: 'v1 后端 api'
-        },
-        {
-          id: 2,
-          name: 'v1 客户端 安卓'
-        },
-        {
-          id: 3,
-          name: 'v1 客户端 苹果'
-        }
       ]
     }
+  },
+
+  mounted () {
+    axios
+      .get('http://localhost:8000/groups.php')
+      .then(response => {
+        this.groups = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      }).finally(() => {
+        this.loading = false
+      })
   },
 
   methods: {
