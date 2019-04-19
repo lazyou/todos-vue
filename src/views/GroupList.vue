@@ -88,6 +88,10 @@ export default {
     new Http({
       url: '/groups.php',
       method: 'GET',
+      catchConfig: {
+        message: '蜜汁错误',
+        type: 'warning'
+      },
       handleThen: (response) => {
         this.groups = response.data
       }

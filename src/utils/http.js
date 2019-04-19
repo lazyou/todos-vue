@@ -14,22 +14,27 @@ export default class Http {
       method: 'GET',
       headers: {},
       baseURL: API_BASE_URL,
-      timeout: 2000,
+      // timeout: 2000,
       // 自定义配置项
       handleThen: null,
       handleCatch: null,
       handleFinally: null,
-      useShowLoading: true
+
+      // handleCatch 的 Message 配置
+      catchConfig: null
     }
 
+    // 配置项覆盖
     this.config = Object.assign(defaultConfig, config)
     this.axios = axios(this.config)
-    // TODO: 这里处理失败
-    this.interceptors()
-    this.handle()
+    // this.interceptors()
   }
 
-  run () {}
+  run () {
+    store.commit('showLoading')
+
+    this.handle()
+  }
 
   handle () {
     this.axios
@@ -50,14 +55,14 @@ export default class Http {
   // catch 处理 （异常）
   setHandleCatch () {
     if (this.config.handleCatch === null) {
-      console.log('setHandleCatch:')
-
       return (error) => {
-        Message({
+        let catchConfig = Object.assign({
           message: error,
           type: 'error',
           center: true
-        })
+        }, this.config.catchConfig)
+
+        Message(catchConfig)
       }
     } else {
       return this.config.handleCatch
@@ -67,15 +72,16 @@ export default class Http {
   // finally 处理
   setHandleFinally () {
     if (this.config.handleFinally === null) {
-      console.log('setHandleFinally：')
-
-      store.state.showLoading = false
+      return () => {
+        store.commit('hiddenLoading')
+      }
     } else {
       return this.config.handleFinally
     }
   }
 
-  // axios 拦截器
+  // axios 拦截器: 拦截器暂时没用
+  // 只有 axios.create 创建的实例才能使用拦截器
   interceptors () {
     this.requestInterceptors()
     this.responseInterceptors()
@@ -85,9 +91,6 @@ export default class Http {
   requestInterceptors () {
     if (this.config.useShowLoading) {
       this.axios.interceptors.request.use(function (config) {
-        console.log('requestInterceptors:')
-        console.log(store.state.showLoading)
-
         store.state.showLoading = true
         return config
       })
@@ -98,9 +101,6 @@ export default class Http {
   responseInterceptors () {
     if (this.config.useShowLoading) {
       this.axios.interceptors.response.use(function (config) {
-        console.log('responseInterceptors:')
-        console.log(store.state.showLoading)
-
         store.state.showLoading = false
         return config
       })
