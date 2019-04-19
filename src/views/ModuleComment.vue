@@ -1,14 +1,30 @@
 <template>
-  <div>
+  <div style="text-align: left; padding-top: 20px;">
     <el-input
       v-model="comment"
       type="textarea"
       :autosize="{ minRows: 4, maxRows: 4}"
-      style="padding-top:30px;"
+      style="padding-top: 5px;"
       placeholder="请输入评论">
     </el-input>
 
     <section style="padding-top:10px; text-align:right;">
+      <el-select
+        v-model="sendUserIds"
+        v-if="commentLength"
+        filterable
+        multiple
+        size="small"
+        style="padding-right: 20px;"
+        placeholder="通知人">
+        <el-option
+          v-for="user in users"
+          :key="user.id"
+          :label="user.name"
+          :value="user.id">
+        </el-option>
+      </el-select>
+
       <el-button
         v-if="commentLength"
         @click="saveComment()"
@@ -29,11 +45,26 @@
 </template>
 
 <script>
+import Http from '../utils/http'
+
 export default {
   data () {
     return {
-      comment: ''
+      comment: '',
+      users: [],
+      // @ 通知人
+      sendUserIds: []
     }
+  },
+
+  mounted () {
+    new Http({
+      url: '/users.php',
+      method: 'GET',
+      handleThen: (response) => {
+        this.users = response.data
+      }
+    }).run()
   },
 
   computed: {
@@ -58,8 +89,7 @@ export default {
 </script>
 
 <style scoped>
-.el-main div{
-  line-height: 0px;
+div >>> .el-select__tags {
+  max-width: 300px;
 }
-
 </style>
