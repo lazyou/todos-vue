@@ -88,13 +88,17 @@ export default {
     new Http({
       url: '/groups.php',
       method: 'GET',
-      handleThen: (response) => {
-        this.groups = response.data
-      }
+      handleThen: this.initGroups()
     }).run()
   },
 
   methods: {
+    initGroups () {
+      return (response) => {
+        this.groups = response.data
+      }
+    },
+
     selectGroup (group) {
       this.currentGroup = group
       this.currentGroupBackup = objAssign(group)
