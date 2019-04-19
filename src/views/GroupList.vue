@@ -62,7 +62,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import Http from '../utils/http'
 import { objAssign } from '../utils/function'
 
