@@ -4,6 +4,7 @@ import { Message } from 'element-ui'
 import { API_BASE_URL } from '../config/config'
 
 /**
+ * 通用业务 http 请求类
  * axios: http://www.axios-js.com/zh-cn/docs
  */
 export default class Http {
