@@ -27,7 +27,6 @@ export default class Http {
     // 配置项覆盖
     this.config = Object.assign(defaultConfig, config)
     this.axios = axios(this.config)
-    // this.interceptors()
   }
 
   run () {
@@ -77,33 +76,6 @@ export default class Http {
       }
     } else {
       return this.config.handleFinally
-    }
-  }
-
-  // axios 拦截器: 拦截器暂时没用
-  // 只有 axios.create 创建的实例才能使用拦截器
-  interceptors () {
-    this.requestInterceptors()
-    this.responseInterceptors()
-  }
-
-  // 请求拦截器
-  requestInterceptors () {
-    if (this.config.useShowLoading) {
-      this.axios.interceptors.request.use(function (config) {
-        store.state.showLoading = true
-        return config
-      })
-    }
-  }
-
-  // 响应拦截器
-  responseInterceptors () {
-    if (this.config.useShowLoading) {
-      this.axios.interceptors.response.use(function (config) {
-        store.state.showLoading = false
-        return config
-      })
     }
   }
 }
