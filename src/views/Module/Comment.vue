@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Http from '../utils/http'
+import Http from '@/utils/http'
 
 export default {
   data () {

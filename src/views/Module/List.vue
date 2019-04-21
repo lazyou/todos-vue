@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Http from '../utils/http'
-import Module from './Module.vue'
+import Http from '@/utils/http'
+import Module from './Item'
 
 export default {
   components: {

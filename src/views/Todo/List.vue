@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Http from '../utils/http'
-import Todo from './Todo.vue'
+import Http from '@/utils/http'
+import Todo from './Item'
 
 export default {
   components: {
@@ -83,7 +83,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

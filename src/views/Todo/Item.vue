@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { objAssign } from '../utils/function'
+import { objAssign } from '@/utils/function'
 
 export default {
   props: {

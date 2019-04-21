@@ -15,7 +15,7 @@
       </el-aside>
 
       <el-main>
-        <ModuleInfo></ModuleInfo>
+        <ModuleDescription></ModuleDescription>
         <TodoList></TodoList>
         <ModuleComment></ModuleComment>
       </el-main>
@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import GroupDropdown from '../views/Group/Dropdown'
-import ModuleList from '../views/ModuleList.vue'
-import ModuleInfo from '../views/ModuleInfo.vue'
-import TodoList from '../views/TodoList.vue'
-import ModuleComment from '../views/ModuleComment.vue'
+import GroupDropdown from '@/views/Group/Dropdown'
+import ModuleList from '@/views/Module/List'
+import ModuleDescription from '@/views/Module/Description'
+import TodoList from '@/views/Todo/List'
+import ModuleComment from '@/views/Module/Comment'
 
 export default {
   components: {
     GroupDropdown,
     ModuleList,
-    ModuleInfo,
+    ModuleDescription,
     TodoList,
     ModuleComment
   }
