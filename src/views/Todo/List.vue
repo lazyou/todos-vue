@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Http from '@/utils/http'
+import http from '@/utils/http'
 import Todo from './Item'
 
 export default {
@@ -55,17 +55,17 @@ export default {
   },
 
   mounted () {
-    new Http({
+    http.run({
       url: '/todos.php',
       method: 'GET',
       handleThen: this.initTodos()
-    }).run()
+    })
 
-    new Http({
+    http.run({
       url: '/users.php',
       method: 'GET',
       handleThen: this.initUsers()
-    }).run()
+    })
   },
 
   methods: {

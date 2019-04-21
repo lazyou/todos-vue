@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import Http from '@/utils/http'
+import http from '@/utils/http'
 import { objAssign } from '@/utils/function'
 
 export default {
@@ -84,11 +84,11 @@ export default {
   },
 
   mounted () {
-    new Http({
+    http.run({
       url: '/groups.php',
       method: 'GET',
       handleThen: this.initGroups()
-    }).run()
+    })
   },
 
   methods: {

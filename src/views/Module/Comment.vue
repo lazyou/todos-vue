@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Http from '@/utils/http'
+import http from '@/utils/http'
 
 export default {
   data () {
@@ -58,13 +58,13 @@ export default {
   },
 
   mounted () {
-    new Http({
+    http.run({
       url: '/users.php',
       method: 'GET',
       handleThen: (response) => {
         this.users = response.data
       }
-    }).run()
+    })
   },
 
   computed: {

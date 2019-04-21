@@ -7,9 +7,9 @@ import { API_BASE_URL } from '../config/config'
  * 通用业务 http 请求类
  * axios: http://www.axios-js.com/zh-cn/docs
  */
-export default class Http {
-  constructor (config) {
-    let defaultConfig = {
+class Http {
+  constructor () {
+    this.defaultConfig = {
       // axios 配置项
       url: '',
       method: 'GET',
@@ -24,15 +24,14 @@ export default class Http {
       // handleCatch 的 Message 配置
       catchConfig: null
     }
-
-    // 配置项覆盖
-    this.config = Object.assign(defaultConfig, config)
-    this.axios = axios(this.config)
   }
 
-  run () {
-    store.commit('showLoading')
+  run (config) {
+    // 配置项覆盖
+    this.config = Object.assign(this.defaultConfig, config)
+    this.axios = axios(this.config)
 
+    store.commit('showLoading')
     this.handle()
   }
 
@@ -80,3 +79,5 @@ export default class Http {
     }
   }
 }
+
+export default new Http()

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Http from '@/utils/http'
+import http from '@/utils/http'
 import Module from './Item'
 
 export default {
@@ -44,11 +44,11 @@ export default {
     let groupId = this.$route.query.group_id
 
     if (groupId) {
-      new Http({
+      http.run({
         url: `/modules.php?group_id=${groupId}`,
         method: 'GET',
         handleThen: this.initModules()
-      }).run()
+      })
     }
   },
 
