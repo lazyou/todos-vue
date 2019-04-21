@@ -102,6 +102,13 @@ export default {
       this.currentGroup = group
       this.currentGroupBackup = objAssign(group)
       this.isShowEditButton = true
+
+      this.$router.push({
+        path: '/todo',
+        query: {
+          group_id: group.id
+        }
+      })
     },
 
     setIsCanEdit: function (status) {

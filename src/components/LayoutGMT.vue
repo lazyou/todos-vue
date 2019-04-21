@@ -6,7 +6,7 @@
     element-loading-background="rgba(0, 0, 0, 0.8)">
 
     <el-header>
-      <GroupDropdown></GroupDropdown>
+      <GroupList></GroupList>
     </el-header>
 
     <el-container>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import GroupDropdown from '@/views/Group/Dropdown'
+import GroupList from '@/views/Group/List'
 import ModuleList from '@/views/Module/List'
 import ModuleDescription from '@/views/Module/Description'
 import TodoList from '@/views/Todo/List'
@@ -32,7 +32,7 @@ import ModuleComment from '@/views/Module/Comment'
 
 export default {
   components: {
-    GroupDropdown,
+    GroupList,
     ModuleList,
     ModuleDescription,
     TodoList,

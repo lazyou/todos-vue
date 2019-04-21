@@ -41,11 +41,15 @@ export default {
   },
 
   mounted () {
-    new Http({
-      url: '/modules.php',
-      method: 'GET',
-      handleThen: this.initModules()
-    }).run()
+    let groupId = this.$route.query.group_id
+
+    if (groupId) {
+      new Http({
+        url: `/modules.php?group_id=${groupId}`,
+        method: 'GET',
+        handleThen: this.initModules()
+      }).run()
+    }
   },
 
   methods: {

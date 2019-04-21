@@ -19,6 +19,14 @@
 
       <el-button
         slot="append"
+        v-if="!isCanEdit"
+        @click="selectModule(module.id)"
+        style="padding: 10px;"
+        icon="el-icon-d-arrow-right">
+      </el-button>
+
+      <el-button
+        slot="append"
         v-if="isCanEdit"
         @click="saveModule(module.id)"
         style="padding: 10px;"
@@ -86,6 +94,16 @@ export default {
   },
 
   methods: {
+    selectModule: function (moduleId) {
+      this.$router.push({
+        path: '/todo',
+        query: {
+          group_id: this.$route.query.group_id,
+          module_id: moduleId
+        }
+      })
+    },
+
     setIsCanEdit: function (moduleId, status) {
       this.isCanEdit = status
 
