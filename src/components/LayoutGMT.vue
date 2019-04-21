@@ -4,8 +4,9 @@
     element-loading-text="拼命加载中"
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)">
+
     <el-header>
-      <GroupList></GroupList>
+      <GroupDropdown></GroupDropdown>
     </el-header>
 
     <el-container>
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import GroupList from '../views/GroupList.vue'
+import GroupDropdown from '../views/Group/Dropdown'
 import ModuleList from '../views/ModuleList.vue'
 import ModuleInfo from '../views/ModuleInfo.vue'
 import TodoList from '../views/TodoList.vue'
@@ -31,7 +32,7 @@ import ModuleComment from '../views/ModuleComment.vue'
 
 export default {
   components: {
-    GroupList,
+    GroupDropdown,
     ModuleList,
     ModuleInfo,
     TodoList,

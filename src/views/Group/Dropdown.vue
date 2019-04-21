@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="group-dropdown">
     <section v-if="!isCanEdit" >
       <el-dropdown trigger="click" @command="selectGroup">
         <span class="el-dropdown-link">
@@ -18,7 +18,7 @@
 
       <!-- 编辑 -->
       <el-button
-        v-if="isShowEeitButton"
+        v-if="isShowEditButton"
         @click="setIsCanEdit(true)"
         icon="el-icon-edit"
         style="padding-right:10px; background-color:transparent; border:transparent;">
@@ -62,14 +62,14 @@
 </template>
 
 <script>
-import Http from '../utils/http'
-import { objAssign } from '../utils/function'
+import Http from '@/utils/http'
+import { objAssign } from '@/utils/function'
 
 export default {
   data () {
     return {
       isCanEdit: false,
-      isShowEeitButton: false,
+      isShowEditButton: false,
       currentGroup: {
         id: 0,
         name: '请选择分组'
@@ -101,7 +101,7 @@ export default {
     selectGroup (group) {
       this.currentGroup = group
       this.currentGroupBackup = objAssign(group)
-      this.isShowEeitButton = true
+      this.isShowEditButton = true
     },
 
     setIsCanEdit: function (status) {
