@@ -70,6 +70,7 @@ export default {
     return {
       isCanEdit: false,
       isShowEditButton: false,
+      routeGroupId: parseInt(this.$route.query.group_id),
       currentGroup: {
         id: 0,
         name: '请选择分组'
@@ -95,6 +96,10 @@ export default {
     initGroups () {
       return (response) => {
         this.groups = response.data
+
+        this.groups.filter(group => {
+          group.id === this.routeGroupId ? this.currentGroup = group : null
+        })
       }
     },
 

@@ -7,7 +7,7 @@
     </Module>
 
     <el-input
-      v-model="new_module_name"
+      v-model="newModuleName"
       size="medium"
       placeholder="添加模块">
     </el-input>
@@ -33,7 +33,8 @@ export default {
 
   data () {
     return {
-      new_module_name: '',
+      routeGroupId: parseInt(this.$route.query.group_id),
+      newModuleName: '',
       // 当前分组下的 modules
       modules: [
       ]
@@ -41,11 +42,9 @@ export default {
   },
 
   mounted () {
-    let groupId = this.$route.query.group_id
-
-    if (groupId) {
+    if (this.routeGroupId) {
       http.run({
-        url: `/modules.php?group_id=${groupId}`,
+        url: `/modules.php?group_id=${this.routeGroupId}`,
         method: 'GET',
         handleThen: this.initModules()
       })
