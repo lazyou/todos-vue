@@ -72,7 +72,7 @@ class Http {
   setHandleFinally () {
     if (this.config.handleFinally === null) {
       return () => {
-        store.commit('hiddenLoading')
+        store.commit('hideLoading')
       }
     } else {
       return this.config.handleFinally
